@@ -1,9 +1,11 @@
 <div class="row">
     <div class="col-8" [ngSwitch]="typeBox">
-        <app-cube2d [x]="x" [y]="y" [z]="z" [foldHeight]="foldHeight" *ngSwitchCase="'Clasic'"></app-cube2d>
-
+        <div class="card shadow p-3 m-3 wh-100">
+            <app-cube2d [x]="x" [y]="y" [z]="z" [foldHeight]="foldHeight" *ngSwitchCase="'Clasic'"></app-cube2d>
+            <app-box1 [x]="x" [y]="y" [z]="z" [foldHeight]="foldHeight" *ngSwitchCase="'box1'"></app-box1>
+        </div>
     </div>
     <div class="col-4">
-        <app-form-figure (submit)="changeForm($event)"></app-form-figure>
+        <app-form-figure (submit)="changeForm($event)" (onType)="typeBox = $event"></app-form-figure>
     </div>
 </div>

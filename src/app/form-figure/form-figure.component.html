@@ -5,8 +5,9 @@
         <div class="row g-3">
             <div class="col-md-12">
                 <label for="type_box">Diseño</label>
-                <select id="type_box" class="form-control" formControlName="typeBox">
-                    <option value="Clasic" selected>Clasica 01</option>
+                <select id="type_box" class="form-control" formControlName="typeBox" (change)="changetype()">
+                    <option value="box1">Box 01</option>
+                    <option value="Clasic">Clasica 01</option>
                 </select>
             </div>
             <div class="col-md-6">

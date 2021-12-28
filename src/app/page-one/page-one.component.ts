@@ -11,7 +11,7 @@ export class PageOneComponent implements OnInit {
   public y!: number;
   public z!: number;
   public foldHeight!: number;
-  public typeBox: string = 'Clasic';
+  public typeBox: string = 'box1';
   
   constructor() { }
 
