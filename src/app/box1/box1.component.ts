@@ -89,6 +89,7 @@ export class Box1Component implements OnInit, AfterViewInit, OnChanges {
   private createRect(sides: number, x: number, y: number, width: number, heigth: number, eraseSide: string, lineDash: number, context: CanvasRenderingContext2D) {
     
     console.log('rect ', sides);
+    
     switch (sides) {
       case 3:
 
@@ -104,14 +105,13 @@ export class Box1Component implements OnInit, AfterViewInit, OnChanges {
             break;
 
           case "bottom":
-            this.ctx.beginPath
+            context.beginPath
             //this.ctx.setLineDash([lineDash]);
             context.moveTo(x, y + heigth);
             context.lineTo(x, y);
             context.lineTo(x + width, y);
             context.lineTo(x + width, y + heigth);
             context.stroke();
-            context.clearRect(0, 0, this.canvasRef.nativeElement.width, this.canvasRef.nativeElement.height);
             break;
           case "right":
             this.ctx.beginPath

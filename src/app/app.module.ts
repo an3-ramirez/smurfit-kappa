@@ -14,6 +14,7 @@ import { Box1Component } from './box1/box1.component';
 
 /** Pages */
 import { PageOneComponent } from './page-one/page-one.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { PageOneComponent } from './page-one/page-one.component';
     IndexComponent,
     FormFigureComponent,
     Box1Component,
-    PageOneComponent
+    PageOneComponent,
+    NavbarComponent
   ],
   imports: [
     ReactiveFormsModule,
