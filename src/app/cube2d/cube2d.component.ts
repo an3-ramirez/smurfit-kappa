@@ -40,8 +40,11 @@ export class Cube2dComponent implements OnInit, OnChanges, AfterViewInit {
   
   private drawing(x = 0, y = 0, z = 0, _foldHeight = 0) {
     this.ctx.clearRect(0, 0, this.canvasRef.nativeElement.width, this.canvasRef.nativeElement.height);
-    const posX = y + 20;
-    const posY = y + _foldHeight + 40;
+
+    let posX = this.canvasRef.nativeElement.width / 2;
+    posX = posX - z ;
+    let posY = this.canvasRef.nativeElement.height / 2;
+    posY = posY - (x / 2);
     const spOne = 5;
     const spMeasure = 20;
     const widthAla = _foldHeight;
