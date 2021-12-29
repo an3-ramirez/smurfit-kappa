@@ -21,6 +21,8 @@ export class FormFigureComponent implements OnInit {
       y: [100, Validators.required],
       z: [150, Validators.required],
       typeBox: ['box1', Validators.required],
+      shapeFold: ["1", Validators.required],
+      foldGroup: ['A', Validators.required], 
       foldHeight: [20]
     })
   }
@@ -33,7 +35,6 @@ export class FormFigureComponent implements OnInit {
   }
 
   changetype() {
-    //console.log('cambio el tipo: ', this.formRef.value.typeBox);
     this.onType.emit(this.formRef.value.typeBox);
   }
 

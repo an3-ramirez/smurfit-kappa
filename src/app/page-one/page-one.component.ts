@@ -11,6 +11,7 @@ export class PageOneComponent implements OnInit {
   public y!: number;
   public z!: number;
   public foldHeight!: number;
+  public shapeFold : number = 1;
   public typeBox: string = 'box1';
   
   constructor() { }
@@ -18,13 +19,14 @@ export class PageOneComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  changeForm(values: { x: number; y: number; z: number; foldHeight: number; typeBox: string }) {
-    //console.log('values: ', values);
+  changeForm(values: { x: number; y: number; z: number; foldHeight: number; shapeFold : number; typeBox: string }) {
+    
     if (values) {
       this.x = values.x;
       this.y = values.y;
       this.z = values.z;
       this.foldHeight = values.foldHeight;
+      this.shapeFold =  Number(values.shapeFold);
       this.typeBox = values.typeBox;
     }
   }

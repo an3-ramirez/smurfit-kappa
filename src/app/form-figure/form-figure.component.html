@@ -26,6 +26,22 @@
                 <label for="fold_height">Altura pliegue</label>
                 <input type="number" class="form-control" id="fold_height" formControlName="foldHeight" placeholder="0">
             </div>
+            <div class="col-md-12">
+                <label for="shape_type_fold">Estilo de pliegue</label>
+                <select id="shape_fold" class="form-control" formControlName="shapeFold">
+                    <option value= "1" >Forma 1</option>
+                    <option value= "2" >forma 2</option>                    
+                    <option value= "3" >forma 3</option>
+                </select>
+            </div>
+
+            <div class="col-md-12">
+                <label for="fold_group_label">Grupo de pliegues</label>
+                <select id="fold_group" class="form-control" formControlName="foldGroup">
+                    <option value= "A" >grupo A</option>
+                    <option value= "B" >grupo B</option>
+                </select>
+            </div>
             <div class="col-12">
                 <button type="button" (click)="submitForm()" class="btn btn-primary w-100">Render</button>
             </div>
