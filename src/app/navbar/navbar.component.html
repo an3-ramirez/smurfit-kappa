@@ -1,6 +1,8 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light" *ngIf="router.url != '/'">
     <div class="container-fluid">
-        <img class="mx-3" height="30" src="/assets/Logo_Smurfit_Kappa.jpg" alt="smurfitKappa">
+        <a href="/">
+            <img class="mx-3" height="30" src="/assets/Logo_Smurfit_Kappa.jpg" alt="smurfitKappa">
+        </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -31,6 +33,27 @@
                         <li><a class="dropdown-item" href="#">Altura mínima para aplicar fórmula</a></li>
                         <li><a class="dropdown-item" href="#">Aplicar Corrección por Rectangularidad</a></li>
                         <li><a class="dropdown-item" href="#">Fórmula de Mckee - Colombia</a></li>
+                        <li><a class="dropdown-item" href="#">Colocar en Datos Básicos</a></li>
+                        <li><a class="dropdown-item" href="#">Configurar Impresora</a></li>
+                        <li><a class="dropdown-item" href="#">Imprimir Pantalla</a></li>
+                        <li><a class="dropdown-item disabled" href="#">Reporte pesonalizaso</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="#">Capturar Ventana en memoria</a></li>
+                        <li><a class="dropdown-item" href="#">Capturar Patron en memoria</a></li>
+                        <li><a class="dropdown-item disabled" href="#">Enviar Attachement por mail</a></li>
+                        <li><a class="dropdown-item disabled" href="#">Salvar Pantalla en Archivo</a></li>
+                        <li><a class="dropdown-item" href="#">Salvar Patrón en Arrume</a></li>
+                        <li><a class="dropdown-item" href="#">Reasignar material al Cálculo</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="#">Imprimir los Resultados</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="#">Salir</a></li>
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
@@ -39,24 +62,21 @@
                         Modificar Arrume
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#">Salvar Datos y Valores</a></li>
-                        <li><a class="dropdown-item" href="#">Abrir Datos y Valores</a></li>
+                        <li><a class="dropdown-item" href="#">Mixto desde</a></li>
+                        <li><a class="dropdown-item" href="#">Restricción de Altura</a></li>
+                        <li><a class="dropdown-item" href="#">Indicar Altura de las tablas</a></li>
+                        <li><a class="dropdown-item" href="#">Señalar esfuerzos por colores</a></li>
                         <li>
                             <hr class="dropdown-divider">
                         </li>
-                        <li><a class="dropdown-item" href="#">Configurar Factores</a></li>
-                        <li><a class="dropdown-item" href="#">Salvar Valores por Defecto</a></li>
+                        <li><a class="dropdown-item" href="#">Omitir espacios internos en Espiral</a></li>
+                        <li><a class="dropdown-item" href="#">Editar Patrón de arrume</a></li>
+                        <li><a class="dropdown-item disabled" href="#">Aplicar Cambios al patrón editado</a></li>
+                        <li><a class="dropdown-item disabled" href="#">Conservar patrón de arrume editado</a></li>
                         <li>
                             <hr class="dropdown-divider">
                         </li>
-                        <li><a class="dropdown-item" href="#">Trabajar con Manipulación-Transporte-Desalineado</a></li>
-                        <li><a class="dropdown-item" href="#">Cambiar Factor de frabicación = .93</a></li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                        <li><a class="dropdown-item" href="#">Altura mínima para aplicar fórmula</a></li>
-                        <li><a class="dropdown-item" href="#">Aplicar Corrección por Rectangularidad</a></li>
-                        <li><a class="dropdown-item" href="#">Fórmula de Mckee - Colombia</a></li>
+                        <li><a class="dropdown-item" href="#">Notas y Comentarios</a></li>
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
@@ -65,12 +85,25 @@
                         Variables de Paletizado
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#">Action</a></li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
+                        <li><a class="dropdown-item" href="#">Añadir Esquineros</a></li>
+                        <li><a class="dropdown-item" href="#">Añadir Stretch</a></li>
+                        <li><a class="dropdown-item" href="#">Añadir Tabla superior</a></li>
+                        <li><a class="dropdown-item" href="#">Añadir Flejos</a></li>
+                        <li><a class="dropdown-item" href="#">Añadir Tapas</a></li>
+                        <li><a class="dropdown-item" href="#">Añadir Unitizado</a></li>
+                        <li><a class="dropdown-item" href="#">Añadir Divisiones Internas</a></li>
                         <li>
                             <hr class="dropdown-divider">
                         </li>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        <li><a class="dropdown-item" href="#">Estiba UKStandar 1200 x 1000</a></li>
+                        <li><a class="dropdown-item" href="#">Estiba Euro 1200 x 1000</a></li>
+                        <li><a class="dropdown-item" href="#">Estiba Euro 1200 x 800</a></li>
+                        <li><a class="dropdown-item" href="#">Estiba 1200 x 1000 sencilla</a></li>
+                        <li><a class="dropdown-item" href="#">Slip sheet</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="#">Remontar Estibas</a></li>
                     </ul>
                 </li>
                 <li class="nav-item">
