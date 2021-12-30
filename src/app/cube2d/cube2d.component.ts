@@ -1,9 +1,14 @@
 import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, OnChanges, SimpleChanges, Input } from '@angular/core';
 
+import { CreateFoldService } from '../service/createFold/create-fold.service';
+
+import { directionsEnum } from '../enum/directionsEnum';
 enum posEnum {
   vertical,
   horizont
 }
+
+
 
 @Component({
   selector: 'app-cube2d',
@@ -15,6 +20,7 @@ export class Cube2dComponent implements OnInit, OnChanges, AfterViewInit {
   @ViewChild('canvas')
   private canvasRef!: ElementRef;
   private ctx!: CanvasRenderingContext2D;
+  private foldService : CreateFoldService;
 
   /** inputs */
   @Input() public x: number = 0;
@@ -22,7 +28,10 @@ export class Cube2dComponent implements OnInit, OnChanges, AfterViewInit {
   @Input() public z: number = 0;
   @Input() public foldHeight: number = 0;
 
-  constructor() { }
+  constructor(foldService : CreateFoldService) { 
+
+     this.foldService = foldService;
+  }
   
   ngOnInit(): void {
     
@@ -36,6 +45,7 @@ export class Cube2dComponent implements OnInit, OnChanges, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.ctx = this.canvasRef.nativeElement.getContext('2d');
+    this.foldService.setContext(this.ctx);
   }
   
   private drawing(x = 0, y = 0, z = 0, _foldHeight = 0) {
@@ -76,15 +86,12 @@ export class Cube2dComponent implements OnInit, OnChanges, AfterViewInit {
 
     //top alas
     //ala left
-    this.ctx.lineTo(posX - widthAla, posY - spOne);
-    this.ctx.lineTo(posX - widthAla, posY - y + spOne);
-    this.ctx.lineTo(posX, posY - y);
+    this.foldService.createFold(posX, posY - y, this.foldHeight, y, 1, directionsEnum.right, 0);
+    
 
     //ala top
-    this.ctx.lineTo(posX + spOne, posY - y - widthAla);
-    this.ctx.lineTo(posX + z - spOne, posY - y - widthAla);
-    this.ctx.lineTo(posX + z, posY - y);
-
+    this.foldService.createFold(posX, posY - y, z, this.foldHeight, 1, directionsEnum.bottom, 0);
+    
     //ala right
     this.ctx.lineTo(posX + z + widthAla, posY - y + spOne);
     this.ctx.lineTo(posX + z + widthAla, posY - spOne);
@@ -120,14 +127,7 @@ export class Cube2dComponent implements OnInit, OnChanges, AfterViewInit {
     this.ctx.lineTo(posX - y, posY);
     this.ctx.lineTo(posX, posY);
 
-    //measures
-    /* this.ctx.moveTo(posX, posY - y - widthAla - spMeasure + 5);
-    this.ctx.lineTo(posX, posY - y - widthAla - spMeasure - 5);
-    this.ctx.moveTo(posX, posY - y - widthAla - spMeasure);
-    this.ctx.lineTo(posX + z, posY - y - widthAla - spMeasure);
-    this.ctx.moveTo(posX + z, posY - y - widthAla - spMeasure + 5);
-    this.ctx.lineTo(posX + z, posY - y - widthAla - spMeasure - 5); */
-    //const post = 
+    
     this.drawingMeasureLine({x:posX, y:posY - y - widthAla - spMeasure}, z, posEnum.horizont, `${z.toString()} px`);
 
     this.ctx.stroke();
@@ -148,5 +148,8 @@ export class Cube2dComponent implements OnInit, OnChanges, AfterViewInit {
     this.ctx.moveTo(point.x + width, point.y + 5);
     this.ctx.lineTo(point.x + width, point.y - 5);
   }
+
+  
+  
 
 }
