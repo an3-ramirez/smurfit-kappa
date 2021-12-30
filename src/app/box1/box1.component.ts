@@ -342,8 +342,8 @@ export class Box1Component implements OnInit, AfterViewInit, OnChanges {
         this.ctx.lineTo(x + (width * 0.95), y + 5);
 
         break;
-      case directionEnum.left:
-        break;
+      
+
       default: break;
     }
   }
