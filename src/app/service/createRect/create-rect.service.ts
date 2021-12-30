@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { directionsEnum } from 'src/app/enum/directionsEnum';
+import { directionsEnum } from 'src/app/enums/directions-enum';
 
 @Injectable({
   providedIn: 'root'

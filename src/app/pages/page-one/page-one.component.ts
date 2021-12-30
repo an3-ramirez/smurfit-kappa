@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
+/** Enums */
+import { BoxTypeEnum } from 'src/app/enums/box-type-enum';
+
 @Component({
   selector: 'app-page-one',
   templateUrl: './page-one.component.html',
@@ -12,14 +15,16 @@ export class PageOneComponent implements OnInit {
   public z!: number;
   public foldHeight!: number;
   public shapeFold : number = 1;
-  public typeBox: string = 'box1';
+  public typeBox: BoxTypeEnum = BoxTypeEnum.BOX_ONE;
+
+  public BoxTypeEnum = BoxTypeEnum;
   
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  changeForm(values: { x: number; y: number; z: number; foldHeight: number; shapeFold : number; typeBox: string }) {
+  changeForm(values: { x: number; y: number; z: number; foldHeight: number; shapeFold : number; typeBox: BoxTypeEnum }) {
     
     if (values) {
       this.x = values.x;

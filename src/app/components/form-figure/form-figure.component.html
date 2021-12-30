@@ -1,0 +1,49 @@
+<h5 class="mb-4">Ingrese los datos para crear el diseño</h5>
+
+<form [formGroup]="formRef">
+    <div class="row g-3">
+        <div class="col-md-12">
+            <label for="type_box">Diseño</label>
+            <select id="type_box" class="form-select" formControlName="typeBox" (change)="changetype()">
+                <option [value]="BoxTypeEnum.BOX_ONE">Caja 1</option>
+                <option [value]="BoxTypeEnum.BOX_TWO">Caja 2</option>
+            </select>
+        </div>
+        <div class="col-md-4 col-sm-6 col-xs-12">
+            <label for="prof">Largo</label>
+            <input type="number" class="form-control" id="prof" formControlName="z" placeholder="0">
+        </div>
+        <div class="col-md-4 col-sm-6 col-xs-12">
+            <label for="ancho">Ancho</label>
+            <input type="number" class="form-control" id="ancho" formControlName="x" placeholder="0">
+        </div>
+        <div class="col-md-4 col-sm-6 col-xs-12">
+            <label for="alto">Alto</label>
+            <input type="number" class="form-control" id="alto" formControlName="y" placeholder="0">
+        </div>
+        <div class="col-md-4 col-sm-6 col-xs-12">
+            <label for="fold_height">Altura pliegue</label>
+            <input type="number" class="form-control" id="fold_height" formControlName="foldHeight" placeholder="0">
+        </div>
+        <hr>
+        <div class="col-md-6 col-sm-12">
+            <label for="shape_type_fold">Estilo de pliegue</label>
+            <select id="shape_fold" class="form-select" formControlName="shapeFold">
+                <option value="1">Forma 1</option>
+                <option value="2">forma 2</option>
+                <option value="3">forma 3</option>
+            </select>
+        </div>
+
+        <div class="col-md-6 col-sm-12">
+            <label for="fold_group_label">Grupo de pliegues</label>
+            <select id="fold_group" class="form-select" formControlName="foldGroup">
+                <option value="A">grupo A</option>
+                <option value="B">grupo B</option>
+            </select>
+        </div>
+        <div class="col-12">
+            <button type="button" (click)="submitForm()" class="btn btn-primary w-100">Render</button>
+        </div>
+    </div>
+</form>

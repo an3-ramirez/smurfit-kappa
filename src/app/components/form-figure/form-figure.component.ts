@@ -1,5 +1,8 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
+/** Enums */
+import { BoxTypeEnum } from 'src/app/enums/box-type-enum';
 
 
 @Component({
@@ -10,6 +13,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 export class FormFigureComponent implements OnInit {
 
   public formRef!: FormGroup;
+  public BoxTypeEnum = BoxTypeEnum;
 
   /** Outputs */
   @Output() submit = new EventEmitter();
@@ -20,7 +24,7 @@ export class FormFigureComponent implements OnInit {
       x: [50, Validators.required],
       y: [100, Validators.required],
       z: [150, Validators.required],
-      typeBox: ['box1', Validators.required],
+      typeBox: [BoxTypeEnum.BOX_ONE, Validators.required],
       shapeFold: ["1", Validators.required],
       foldGroup: ['A', Validators.required], 
       foldHeight: [20]

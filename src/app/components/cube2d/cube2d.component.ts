@@ -1,14 +1,13 @@
 import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, OnChanges, SimpleChanges, Input } from '@angular/core';
 
-import { CreateFoldService } from '../service/createFold/create-fold.service';
+import { CreateFoldService } from '../../service/createFold/create-fold.service';
 
-import { directionsEnum } from '../enum/directionsEnum';
+import { directionsEnum } from '../../enums/directions-enum';
+
 enum posEnum {
   vertical,
   horizont
 }
-
-
 
 @Component({
   selector: 'app-cube2d',
@@ -22,6 +21,9 @@ export class Cube2dComponent implements OnInit, OnChanges, AfterViewInit {
   private ctx!: CanvasRenderingContext2D;
   private foldService : CreateFoldService;
 
+  public innerWidth: any;
+  public innerHeight: any;
+
   /** inputs */
   @Input() public x: number = 0;
   @Input() public y: number = 0;
@@ -34,11 +36,12 @@ export class Cube2dComponent implements OnInit, OnChanges, AfterViewInit {
   }
   
   ngOnInit(): void {
-    
+    this.innerWidth = window.innerWidth * 0.64;
+    this.innerHeight = window.innerHeight * 0.82;
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (this.x != 0 && this.y != 0 && this.z != 0 && this.ctx != undefined ) {
+    if (this.x && this.y && this.z && this.ctx != undefined ) {
       this.drawing(this.x, this.y, this.z, this.foldHeight);
     }
   }
@@ -46,6 +49,10 @@ export class Cube2dComponent implements OnInit, OnChanges, AfterViewInit {
   ngAfterViewInit(): void {
     this.ctx = this.canvasRef.nativeElement.getContext('2d');
     this.foldService.setContext(this.ctx);
+
+    if (this.x && this.y && this.z && this.ctx != undefined) {
+      this.drawing(this.x, this.y, this.z, this.foldHeight);
+    }
   }
   
   private drawing(x = 0, y = 0, z = 0, _foldHeight = 0) {

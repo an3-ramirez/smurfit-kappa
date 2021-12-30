@@ -1,12 +1,12 @@
 import { AfterViewInit, Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 
-import { directionsEnum } from '../enum/directionsEnum';
+import { directionsEnum } from '../../enums/directions-enum';
 
-import { CreateFoldService } from '../service/createFold/create-fold.service';
+import { CreateFoldService } from '../../service/createFold/create-fold.service';
 
-import { CreateMeasureLineServiceService } from '../service/createMeasureLine/create-measure-line.service';
+import { CreateMeasureLineServiceService } from '../../service/createMeasureLine/create-measure-line.service';
 
-import { CreateRectServiceService } from '../service/createRect/create-rect.service';
+import { CreateRectServiceService } from '../../service/createRect/create-rect.service';
 
 
 @Component({
@@ -24,6 +24,9 @@ export class Box1Component implements OnInit, AfterViewInit, OnChanges {
   private measureLineService : CreateMeasureLineServiceService;
   private rectService : CreateRectServiceService;
 
+  public innerWidth: any;
+  public innerHeight: any;
+
   /** Inputs */
   @Input() public x: number = 0;
   @Input() public y: number = 0;
@@ -40,22 +43,24 @@ export class Box1Component implements OnInit, AfterViewInit, OnChanges {
   }
 
   ngOnInit(): void {
+    this.innerWidth = window.innerWidth * 0.64;
+    this.innerHeight = window.innerHeight * 0.82;
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-
     if (this.x != 0 && this.y != 0 && this.z != 0 &&  this.shapeFold != 0 && this.ctx != undefined) {
       this.render(this.x, this.y, this.z, this.foldHeight, this.shapeFold,  this.ctx);
     }
   }
 
   ngAfterViewInit() {
-
     this.ctx = this.canvasRef.nativeElement.getContext('2d');
     this.rectService.setContexto(this.ctx);
     this.foldService.setContext(this.ctx);
     this.measureLineService.setContexto(this.ctx);
-
+    if (this.x && this.y && this.z && this.shapeFold && this.ctx != undefined) {
+      this.render(this.x, this.y, this.z, this.foldHeight, this.shapeFold,  this.ctx);
+    }
   }
 
   private render(x: number, y: number, depht: number, fold: number, shapeFold : number, ctx: CanvasRenderingContext2D) {
