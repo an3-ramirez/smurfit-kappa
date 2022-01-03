@@ -5,7 +5,7 @@ import { directionsEnum } from 'src/app/enums/directions-enum';
 @Injectable({
   providedIn: 'root'
 })
-export class CreateRectServiceService {
+export class CreateRectService {
 
   private ctx! : CanvasRenderingContext2D;
 
@@ -16,7 +16,7 @@ export class CreateRectServiceService {
     this.ctx = contexto;
   }
 
-  public createRect(sides: number, x: number, y: number, width: number, heigth: number, eraseSide: directionsEnum, lineDash: number) {
+  public createRect(sides: number, x: number, y: number, width: number, heigth: number, eraseSide: directionsEnum) {
 
     switch (sides) {
       case 3:
@@ -64,7 +64,7 @@ export class CreateRectServiceService {
         break;
       case 4:
 
-        this.createSquare(x, y, width, heigth, lineDash, this.ctx);
+        this.createSquare(x, y, width, heigth, this.ctx);
         break;
 
       default:
@@ -75,11 +75,9 @@ export class CreateRectServiceService {
   }
 
 
-  private createSquare(x: number, y: number, width: number, heigth: number, lineDash: number,
-    contexto: CanvasRenderingContext2D) {
+  private createSquare(x: number, y: number, width: number, heigth: number, contexto: CanvasRenderingContext2D) {
 
     contexto.moveTo(x, y);
-    contexto.setLineDash([lineDash]);
     contexto.strokeRect(x, y, width, heigth);
 
   }

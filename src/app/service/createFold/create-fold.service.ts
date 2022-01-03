@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 import { directionsEnum } from 'src/app/enums/directions-enum';
 
 /** Interfaces */
-import { IMeasures } from 'src/app/interfaces/imeasures';
+import { IMeasures } from 'src/app/interfaces/IMeasures';
 
 @Injectable({
   providedIn: 'root'
@@ -19,108 +19,137 @@ export class CreateFoldService {
     this.ctx = contexto;
   }
 
-  public createFold(x: number, y: number, width: number, heigth: number, form: number, eraseSide: directionsEnum, lineDash: number) {
+  public createFold(x: number, y: number, width: number, heigth: number, form: number, positionFold: directionsEnum) {
 
-    const compacVars: IMeasures = {x, y, width, heigth};
+    const inclination = 0.10;
+    const dimensionsVars: IMeasures = {x, y, width, heigth, inclination};
     switch (form) {
       case 1:
-        this.shapeTypeOne(eraseSide, compacVars)
+        this.shapeTypeOne(positionFold, dimensionsVars)
         break;
 
       case 2:
-        this.shapeTypeTwo(eraseSide, compacVars);
+        this.shapeTypeTwo(positionFold, dimensionsVars);
         break;
       
       case 3:
-        this.shapeTypeTree(eraseSide, compacVars);
+        this.shapeTypeTree(positionFold, dimensionsVars);
         break;
 
       default: break;
     }
   }
 
-  private shapeTypeOne(type: directionsEnum, cpVar: IMeasures) {
+  private shapeTypeOne(type: directionsEnum, dimensions: IMeasures) {
+    
+
     switch (type) {
+      
       case directionsEnum.top:
-        this.ctx.moveTo(cpVar.x, cpVar.y);
-        this.ctx.lineTo(cpVar.x + (cpVar.width * 0.20), cpVar.y + cpVar.heigth);
-        this.ctx.lineTo(cpVar.x + (cpVar.width * 0.80), cpVar.y + cpVar.heigth);
-        this.ctx.lineTo(cpVar.x + cpVar.width, cpVar.y);
+        this.ctx.moveTo(dimensions.x, dimensions.y);
+        this.ctx.lineTo(dimensions.x + (dimensions.width * dimensions.inclination), dimensions.y - dimensions.heigth);
+        this.ctx.lineTo(dimensions.x + (dimensions.width * (1 - dimensions.inclination)), dimensions.y - dimensions.heigth);
+        this.ctx.lineTo(dimensions.x + dimensions.width, dimensions.y);
         break;
 
       case directionsEnum.bottom:
-        this.ctx.moveTo(cpVar.x, cpVar.y);
-        this.ctx.lineTo(cpVar.x + (cpVar.width * 0.10), cpVar.y - cpVar.heigth);
-        this.ctx.lineTo(cpVar.x + (cpVar.width * 0.90), cpVar.y - cpVar.heigth);
-        this.ctx.lineTo(cpVar.x + cpVar.width, cpVar.y);
+        this.ctx.moveTo(dimensions.x, dimensions.y);
+        this.ctx.lineTo(dimensions.x + (dimensions.width * dimensions.inclination), dimensions.y + dimensions.heigth);
+        this.ctx.lineTo(dimensions.x + (dimensions.width * (1 - dimensions.inclination)), dimensions.y + dimensions.heigth);
+        this.ctx.lineTo(dimensions.x + dimensions.width, dimensions.y);
+        break;
+
+      case directionsEnum.left:
+        this.ctx.moveTo(dimensions.x, dimensions.y);
+        this.ctx.lineTo(dimensions.x - dimensions.width, dimensions.y + (dimensions.heigth * dimensions.inclination));
+        this.ctx.lineTo(dimensions.x - dimensions.width, dimensions.y + (dimensions.heigth * (1 - dimensions.inclination)));
+        this.ctx.lineTo(dimensions.x, dimensions.y + dimensions.heigth);
         break;
 
       case directionsEnum.right:
-        this.ctx.moveTo(cpVar.x, cpVar.y);
-        this.ctx.lineTo(cpVar.x - cpVar.width, cpVar.y + (cpVar.heigth * 0.10));
-        this.ctx.lineTo(cpVar.x - cpVar.width, cpVar.y + (cpVar.heigth * 0.90));
-        this.ctx.lineTo(cpVar.x, cpVar.y + cpVar.heigth);
+        this.ctx.moveTo(dimensions.x, dimensions.y);
+        this.ctx.lineTo(dimensions.x + dimensions.width, dimensions.y + (dimensions.heigth * dimensions.inclination));
+        this.ctx.lineTo(dimensions.x + dimensions.width, dimensions.y + (dimensions.heigth * (1 - dimensions.inclination)));
+        this.ctx.lineTo(dimensions.x, dimensions.y + dimensions.heigth);
         break;
 
       default: break;
     }
   }
 
-  private shapeTypeTwo(type: directionsEnum, cpVar: IMeasures) {
+  private shapeTypeTwo(type: directionsEnum, dimensions: IMeasures) {
     switch (type) {
+      
       case directionsEnum.top:
-        this.ctx.moveTo(cpVar.x, cpVar.y);
-        this.ctx.lineTo(cpVar.x, cpVar.y + (cpVar.heigth * 0.50));
-        this.ctx.lineTo(cpVar.x + (cpVar.width * 0.20), cpVar.y + cpVar.heigth);
-        this.ctx.lineTo(cpVar.x + (cpVar.width * 0.80), cpVar.y + cpVar.heigth);
-        this.ctx.lineTo(cpVar.x + cpVar.width, cpVar.y + (cpVar.heigth * 0.50));
-        this.ctx.lineTo(cpVar.x + cpVar.width, cpVar.y);
-        this.ctx.lineTo(cpVar.x + cpVar.width, cpVar.y);
+        this.ctx.moveTo(dimensions.x, dimensions.y);
+        this.ctx.lineTo(dimensions.x, dimensions.y - (dimensions.heigth * 0.50));
+        this.ctx.lineTo(dimensions.x + (dimensions.width * dimensions.inclination), dimensions.y - dimensions.heigth);
+        this.ctx.lineTo(dimensions.x + (dimensions.width * (1 - dimensions.inclination)), dimensions.y - dimensions.heigth);
+        this.ctx.lineTo(dimensions.x + dimensions.width, dimensions.y - (dimensions.heigth * 0.50));
+        this.ctx.lineTo(dimensions.x + dimensions.width, dimensions.y);
         break;
 
       case directionsEnum.bottom:
-        this.ctx.moveTo(cpVar.x, cpVar.y);
-        this.ctx.lineTo(cpVar.x, cpVar.y - (cpVar.heigth * 0.50));
-        this.ctx.lineTo(cpVar.x + (cpVar.width * 0.20), cpVar.y - cpVar.heigth);
-        this.ctx.lineTo(cpVar.x + (cpVar.width * 0.80), cpVar.y - cpVar.heigth);
-        this.ctx.lineTo(cpVar.x + cpVar.width, cpVar.y - (cpVar.heigth * 0.50));
-        this.ctx.lineTo(cpVar.x + cpVar.width, cpVar.y);
+        this.ctx.moveTo(dimensions.x, dimensions.y);
+        this.ctx.lineTo(dimensions.x, dimensions.y + (dimensions.heigth * 0.50));
+        this.ctx.lineTo(dimensions.x + (dimensions.width * dimensions.inclination), dimensions.y + dimensions.heigth);
+        this.ctx.lineTo(dimensions.x + (dimensions.width * (1 - dimensions.inclination)), dimensions.y + dimensions.heigth);
+        this.ctx.lineTo(dimensions.x + dimensions.width, dimensions.y + (dimensions.heigth * 0.50));
+        this.ctx.lineTo(dimensions.x + dimensions.width, dimensions.y);
+        this.ctx.lineTo(dimensions.x + dimensions.width, dimensions.y);
+        break;
+
+      case directionsEnum.left:
+        this.ctx.moveTo(dimensions.x, dimensions.y);
+        this.ctx.lineTo(dimensions.x - (dimensions.width /2), dimensions.y );
+        this.ctx.lineTo(dimensions.x - dimensions.width , dimensions.y + (dimensions.heigth * dimensions.inclination));
+        this.ctx.lineTo(dimensions.x - dimensions.width , dimensions.y + (dimensions.heigth * (1 - dimensions.inclination)));
+        this.ctx.lineTo(dimensions.x - (dimensions.width/2), dimensions.y + dimensions.heigth);
+        this.ctx.lineTo(dimensions.x , dimensions.y + dimensions.heigth);
         break;
 
       case directionsEnum.right:
-        this.ctx.moveTo(cpVar.x, cpVar.y);
-        this.ctx.lineTo(cpVar.x - (cpVar.width /2), cpVar.y );
-        this.ctx.lineTo(cpVar.x - cpVar.width , cpVar.y + (cpVar.heigth * 0.20));
-        this.ctx.lineTo(cpVar.x - cpVar.width , cpVar.y + (cpVar.heigth * 0.80));
-        this.ctx.lineTo(cpVar.x - (cpVar.width/2), cpVar.y + cpVar.heigth);
-        this.ctx.lineTo(cpVar.x , cpVar.y + cpVar.heigth);
+        this.ctx.moveTo(dimensions.x, dimensions.y);
+        this.ctx.lineTo(dimensions.x + (dimensions.width /2), dimensions.y );
+        this.ctx.lineTo(dimensions.x + dimensions.width , dimensions.y + (dimensions.heigth * dimensions.inclination));
+        this.ctx.lineTo(dimensions.x + dimensions.width , dimensions.y + (dimensions.heigth * (1 - dimensions.inclination)));
+        this.ctx.lineTo(dimensions.x + (dimensions.width/2), dimensions.y + dimensions.heigth);
+        this.ctx.lineTo(dimensions.x , dimensions.y + dimensions.heigth);
         break;
 
       default: break;
     }
   }
 
-  private shapeTypeTree(type: directionsEnum, cpVar: IMeasures) {
+  private shapeTypeTree(type: directionsEnum, dimensions: IMeasures) {
     switch (type) {
       case directionsEnum.top:
-        this.ctx.moveTo(cpVar.x + cpVar.width, cpVar.y);
-        this.ctx.lineTo(cpVar.x + cpVar.width, cpVar.y + (cpVar.heigth / 2));
-        this.ctx.ellipse(cpVar.x + (cpVar.width / 2), cpVar.y + (cpVar.heigth / 2), cpVar.width / 2, cpVar.heigth / 2, 0, 0, Math.PI, false);
-        this.ctx.lineTo(cpVar.x, cpVar.y)
+        this.ctx.moveTo(dimensions.x + dimensions.width, dimensions.y);
+        this.ctx.lineTo(dimensions.x + dimensions.width, dimensions.y - (dimensions.heigth / 2));
+        this.ctx.ellipse(dimensions.x + (dimensions.width / 2), dimensions.y - (dimensions.heigth / 2), dimensions.width / 2, dimensions.heigth / 2, 0, 0, Math.PI, true);
+        this.ctx.lineTo(dimensions.x, dimensions.y);
         break;
 
       case directionsEnum.bottom:
-        this.ctx.moveTo(cpVar.x + cpVar.width, cpVar.y);
-        this.ctx.lineTo(cpVar.x + cpVar.width, cpVar.y - (cpVar.heigth / 2));
-        this.ctx.ellipse(cpVar.x + (cpVar.width / 2), cpVar.y - (cpVar.heigth / 2), cpVar.width / 2, cpVar.heigth / 2, 0, 0, Math.PI, true);
-        this.ctx.lineTo(cpVar.x, cpVar.y);
+        this.ctx.moveTo(dimensions.x + dimensions.width, dimensions.y);
+        this.ctx.lineTo(dimensions.x + dimensions.width, dimensions.y + (dimensions.heigth / 2));
+        this.ctx.ellipse(dimensions.x + (dimensions.width / 2), dimensions.y + (dimensions.heigth / 2), dimensions.width / 2, dimensions.heigth / 2, 0, 0, Math.PI, false);
+        this.ctx.lineTo(dimensions.x, dimensions.y)
         break;
 
-        case directionsEnum.right:
-        this.ctx.moveTo(cpVar.x , cpVar.y + cpVar.heigth);
-        this.ctx.lineTo(cpVar.x - (cpVar.width/2), cpVar.y + cpVar.heigth);
-        this.ctx.ellipse(cpVar.x - (cpVar.width / 2), cpVar.y + (cpVar.heigth / 2), cpVar.heigth / 2, cpVar.width / 2, Math.PI / 2, 0, Math.PI, false);
-        this.ctx.lineTo(cpVar.x , cpVar.y);
+
+      case directionsEnum.left:
+        this.ctx.moveTo(dimensions.x , dimensions.y + dimensions.heigth);
+        this.ctx.lineTo(dimensions.x - (dimensions.width/2), dimensions.y + dimensions.heigth);
+        this.ctx.ellipse(dimensions.x - (dimensions.width / 2), dimensions.y + (dimensions.heigth / 2), dimensions.heigth / 2, dimensions.width / 2, Math.PI / 2, 0, Math.PI, false);
+        this.ctx.lineTo(dimensions.x , dimensions.y);
+        break;
+
+      case directionsEnum.right:
+        this.ctx.moveTo(dimensions.x , dimensions.y);
+        this.ctx.lineTo(dimensions.x + (dimensions.width/2), dimensions.y);
+        this.ctx.ellipse(dimensions.x + (dimensions.width / 2), dimensions.y + (dimensions.heigth / 2), dimensions.heigth / 2, dimensions.width / 2, Math.PI * 1.5, 0, Math.PI, false);
+        this.ctx.lineTo(dimensions.x , dimensions.y + dimensions.heigth);
         break;
 
       default: break;

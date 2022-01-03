@@ -5,7 +5,7 @@ import { directionsEnum } from 'src/app/enums/directions-enum';
 @Injectable({
   providedIn: 'root'
 })
-export class CreateMeasureLineServiceService {
+export class CreateMeasureLineService {
 
   private ctx!: CanvasRenderingContext2D;
 
@@ -17,7 +17,7 @@ export class CreateMeasureLineServiceService {
 
   } 
   
-  public createMeasureLine(x: number, y: number, directionline: directionsEnum, width: number, text: string, lineDash: number) {
+  public createMeasureLine(x: number, y: number, directionline: directionsEnum, width: number, text: string) {
 
     switch (directionline) {
       case directionsEnum.top:
@@ -37,7 +37,7 @@ export class CreateMeasureLineServiceService {
         this.ctx.lineTo(x, y + width);
         this.ctx.moveTo(x - 5, y + width);
         this.ctx.lineTo(x + 5, y + width);
-
+        //this.ctx.strokeStyle = '#ff0000';
         break;
 
       case directionsEnum.bottom:

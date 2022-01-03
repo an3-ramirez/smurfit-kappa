@@ -32,6 +32,9 @@ export class FormFigureComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.formRef.valueChanges.subscribe(x => {
+        this.submit.emit(this.formRef.value);
+    });
   }
 
   submitForm() {
