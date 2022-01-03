@@ -6,15 +6,15 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 /** Componetns */
 import { AppComponent } from './app.component';
-import { CubeComponent } from './cube/cube.component';
-import { Cube2dComponent } from './cube2d/cube2d.component';
-import { IndexComponent } from './index/index.component';
-import { FormFigureComponent } from './form-figure/form-figure.component';
-import { Box1Component } from './box1/box1.component';
+import { CubeComponent } from './components/cube/cube.component';
+import { Cube2dComponent } from './components/cube2d/cube2d.component';
+import { FormFigureComponent } from './components/form-figure/form-figure.component';
+import { Box1Component } from './components/box1/box1.component';
+import { NavbarComponent } from './layouts/components/navbar/navbar.component';
 
 /** Pages */
-import { PageOneComponent } from './page-one/page-one.component';
-import { NavbarComponent } from './navbar/navbar.component';
+import { LoginComponent } from './pages/login/login.component';
+import { PageOneComponent } from './pages/page-one/page-one.component';
 
 
 @NgModule({
@@ -22,7 +22,7 @@ import { NavbarComponent } from './navbar/navbar.component';
     AppComponent,
     CubeComponent,
     Cube2dComponent,
-    IndexComponent,
+    LoginComponent,
     FormFigureComponent,
     Box1Component,
     PageOneComponent,

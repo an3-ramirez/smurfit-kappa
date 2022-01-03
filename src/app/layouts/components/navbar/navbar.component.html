@@ -1,0 +1,179 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary" *ngIf="router.url != '/'">
+    <div class="container-fluid">
+        <a href="/">
+            <img class="mx-3" height="30" src="/assets/Logo_Smurfit_Kappa.jpg" alt="smurfitKappa">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        Archivo
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="#">Recuperar Cálculo</a></li>
+                        <li><a class="dropdown-item" href="#">Recuperar Cálculo desde lista</a></li>
+                        <li><a class="dropdown-item" href="#">Recuperar Cálculo por elemento GICO</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="#">Interfase con Cape Pack</a></li>
+                        <li><a class="dropdown-item" href="#">Optimizar Patrón de Arrume Rápido</a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="#">Exportar Plano de Newcalc</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="#">Salvar Cálculo en archivo TXT</a></li>
+                        <li><a class="dropdown-item" href="#">Importar Cálculo desde archivo TXT</a></li>
+                        <li><a class="dropdown-item" href="#">Capturar Imagen de la Caja</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="#">Mostrar Ventana de Archivos de Corte</a></li>
+                        <li><a class="dropdown-item" href="#">Mostrar Ventana de Etiquetas</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="#">Configurar Impresora</a></li>
+                        <li><a class="dropdown-item" href="#">Selecionar Impresora</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        Editar
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="#">Editar Componentes</a></li>
+                        <li><a class="dropdown-item disabled" href="#">Crear Versión al Componente</a></li>
+                        <li><a class="dropdown-item" href="#">Reservar Número Padre</a></li>
+                        <li><a class="dropdown-item" href="#">Reemplazar/Recuperar otro Cálculo con este...</a></li>
+                        <li><a class="dropdown-item" href="#">Modificar Dim/Material/Estilos sin alterar Cálculo</a>
+                        </li>
+                        <li><a class="dropdown-item" href="#">Reasignar Material a un calculo</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="#">Dejar Huérfano el componente actual</a></li>
+                        <li><a class="dropdown-item" href="#">Incorporar Componente a un Padre</a></li>
+                        <li><a class="dropdown-item" href="#">Traer un Componente a Solicitud</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="#">Activar/Inactivar Componentes</a></li>
+                        <li><a class="dropdown-item" href="#">Activar/Inactivar todo el cálculo</a></li>
+                        <li><a class="dropdown-item" href="#">Permitir ver Componentes Inactivos</a></li>
+                        <li><a class="dropdown-item" href="#">Desplazar Componentes</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="#">Combinar Estilos Fefco</a></li>
+                        <li><a class="dropdown-item" href="#">Multiples Cálculos para Pruebas</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        Opciones
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="#">Resolución Pantalla</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="#">Seleccionar Estilos x Método Gráfico</a></li>
+                        <li><a class="dropdown-item" href="#">Ventana de Hojas Teóricas</a></li>
+                        <li><a class="dropdown-item" href="#">Ventana para Generar Cabidas</a></li>
+                        <li><a class="dropdown-item" href="#">Ventana de información del Cliente</a></li>
+                        <li><a class="dropdown-item" href="#">Ingresar Impresión del componente</a></li>
+                        <li><a class="dropdown-item" href="#">Vincular Archivo de Corel(Adobe Illustrator)</a></li>
+                        <li><a class="dropdown-item" href="#">Indicar Dimensiones Externas</a></li>
+                        <li><a class="dropdown-item" href="#">Permitir Ancho mayor que Largo</a></li>
+                        <li><a class="dropdown-item" href="#">Redondear aletas y mantener ancho de la caja</a></li>
+                        <li><a class="dropdown-item" href="#">Orden de las Caras</a></li>
+                        <li><a class="dropdown-item" href="#">Imprimir Planos</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="#">Información del Componente</a></li>
+                        <li><a class="dropdown-item" href="#">Unidades de Medida</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        Ver
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="#">Invertir Controles</a></li>
+                        <li><a class="dropdown-item" href="#">Visualizacion de PDF</a></li>
+                        <li><a class="dropdown-item disabled" href="#">Ver Ventana de Arreglos</a></li>
+                        <li><a class="dropdown-item" href="#">Ver Archivo de Soporte</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="#">Numero Flotante</a></li>
+                        <li><a class="dropdown-item" href="#">Siguiente Compoente</a></li>
+                        <li><a class="dropdown-item disabled" href="#">Modo visualizar Particiones</a></li>
+                        <li><a class="dropdown-item disabled" href="#">Abriar Vetana de Rutas</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="#">Ver listado de Variables del Componente</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item disabled" href="#">Ver Ventana de Máquinas y Extras</a></li>
+                        <li><a class="dropdown-item" href="#">Ver Especificaiones del Material</a></li>
+                        <li><a class="dropdown-item" href="#">Ver Listado Datos x material</a></li>
+                        <li><a class="dropdown-item" href="#">Ver Comandos ArtiosCad</a></li>
+                        <li><a class="dropdown-item" href="#">Ver Planeamiento</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="#">Visualización de Clíes</a></li>
+                        <li><a class="dropdown-item" href="#">Adminitración de Troqueles</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        Ayudas
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="#">Nueva Ventana</a></li>
+                        <li><a class="dropdown-item" href="#">Fast Track Help</a></li>
+                        <li><a class="dropdown-item" href="#">Ejecutar Packaging Design</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="#">Acerca de</a></li>
+                        <li><a class="dropdown-item" href="#">Manual de Newcalc</a></li>
+                        <li><a class="dropdown-item" href="#">Generar Costo Total Powerpoint</a></li>
+                        <li><a class="dropdown-item" href="#">Generar Archivo iinterfaces con PackExpert</a></li>
+                        <li><a class="dropdown-item" href="#">Mostrar Administrador de Libros</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="#">Hacer Seguimiento de Actividades</a></li>
+                        <li><a class="dropdown-item" href="#">Mostrar conecxion de SQL</a></li>
+                        <li><a class="dropdown-item" href="#">Refrescar Conexion</a></li>
+                        <li><a class="dropdown-item" href="#">Verificar unidades de Red</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <form class="d-flex">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-light" type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+</nav>
