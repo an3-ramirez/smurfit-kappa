@@ -24,7 +24,7 @@ export class FormFigureComponent implements OnInit {
       x: [50, Validators.required],
       y: [100, Validators.required],
       z: [150, Validators.required],
-      typeBox: [BoxTypeEnum.BOX_ONE, Validators.required],
+      typeBox: [BoxTypeEnum.BOX_TREE, Validators.required],
       shapeFold: ["1", Validators.required],
       foldGroup: ['A', Validators.required], 
       foldHeight: [20]
@@ -34,6 +34,7 @@ export class FormFigureComponent implements OnInit {
   ngOnInit(): void {
     this.formRef.valueChanges.subscribe(x => {
         this.submit.emit(this.formRef.value);
+        console.log('medi ', this.formRef.value);
     });
   }
 
