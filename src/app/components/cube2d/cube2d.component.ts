@@ -22,6 +22,8 @@ export class Cube2dComponent implements OnInit, OnChanges, AfterViewInit {
   private ctx!: CanvasRenderingContext2D;
   private foldService: CreateFoldService;
   private measureLineService: CreateMeasureLineService;
+  private TypeFoldA : number;
+  private TypeFoldB : number;
 
   public innerWidth: any;
   public innerHeight: any;
@@ -32,10 +34,14 @@ export class Cube2dComponent implements OnInit, OnChanges, AfterViewInit {
   @Input() public z: number = 0;
   @Input() public foldHeight: number = 0;
   @Input() public shapeFold: number = 0;
+  @Input() public foldGroup! : String;
+  
 
   constructor(foldService : CreateFoldService, _measureLineService: CreateMeasureLineService) { 
     this.measureLineService = _measureLineService;
     this.foldService = foldService;
+    this.TypeFoldA = 1;
+    this.TypeFoldB = 2;
   }
   
   ngOnInit(): void {
@@ -45,7 +51,7 @@ export class Cube2dComponent implements OnInit, OnChanges, AfterViewInit {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (this.x && this.y && this.z && this.ctx != undefined ) {
-      this.drawing(this.x, this.y, this.z, this.foldHeight);
+      this.drawing(this.x, this.y, this.z, this.foldHeight, false, this.foldGroup);
     }
   }
 
@@ -55,12 +61,14 @@ export class Cube2dComponent implements OnInit, OnChanges, AfterViewInit {
     this.measureLineService.setContexto(this.ctx);
 
     if (this.x && this.y && this.z && this.ctx != undefined) {
-      this.drawing(this.x, this.y, this.z, this.foldHeight);
+      this.drawing(this.x, this.y, this.z, this.foldHeight, true, this.foldGroup);
     }
   }
   
-  private drawing(x = 0, y = 0, z = 0, _foldHeight = 0) {
+  private drawing(x = 0, y = 0, z = 0, _foldHeight = 0, initiallize : boolean, foldGroup : String) {
     this.ctx.clearRect(0, 0, this.canvasRef.nativeElement.width, this.canvasRef.nativeElement.height);
+
+    this.setFoldGroup(foldGroup, initiallize, this.shapeFold);
 
     let posX = this.canvasRef.nativeElement.width / 2;
     posX = posX - z ;
@@ -97,33 +105,33 @@ export class Cube2dComponent implements OnInit, OnChanges, AfterViewInit {
 
     //top alas
     //ala left
-    this.foldService.createFold(posX, posY - y, this.foldHeight, y, this.shapeFold, directionsEnum.left);
+    this.foldService.createFold(posX, posY - y, this.foldHeight, y, this.TypeFoldA, directionsEnum.left);
     
     //ala top
-    this.foldService.createFold(posX, posY - y, z, this.foldHeight, this.shapeFold, directionsEnum.top);
+    this.foldService.createFold(posX, posY - y, z, this.foldHeight, this.TypeFoldA, directionsEnum.top);
     
     //ala right
-    this.foldService.createFold(posX + z, posY - y, this.foldHeight, y, this.shapeFold, directionsEnum.right);
+    this.foldService.createFold(posX + z, posY - y, this.foldHeight, y, this.TypeFoldA, directionsEnum.right);
 
     //tapa
 
     this.ctx.moveTo(posX + z, posY);
     this.ctx.lineTo(posX + z*2 + y, posY);
 
-    this.foldService.createFold(posX + z*2 + y, posY, this.foldHeight * 2, x, 2, directionsEnum.right);
+    this.foldService.createFold(posX + z*2 + y, posY, this.foldHeight * 2, x, this.TypeFoldB, directionsEnum.right);
 
     this.ctx.moveTo(posX + z*2 + y, posY + x);
     this.ctx.lineTo(posX + z, posY + x);
 
     //bottom alas
     //ala right
-    this.foldService.createFold(posX + z, posY + x, this.foldHeight, y, this.shapeFold, directionsEnum.right);
+    this.foldService.createFold(posX + z, posY + x, this.foldHeight, y, this.TypeFoldA, directionsEnum.right);
 
     //ala bottom
-    this.foldService.createFold(posX, posY + x + y, z, this.foldHeight, this.shapeFold, directionsEnum.bottom);
+    this.foldService.createFold(posX, posY + x + y, z, this.foldHeight, this.TypeFoldA, directionsEnum.bottom);
 
     //ala left
-    this.foldService.createFold(posX, posY + x, this.foldHeight, y, this.shapeFold, directionsEnum.left);
+    this.foldService.createFold(posX, posY + x, this.foldHeight, y, this.TypeFoldA, directionsEnum.left);
 
     //fron box
     this.ctx.moveTo(posX, posY + x );
@@ -132,28 +140,29 @@ export class Cube2dComponent implements OnInit, OnChanges, AfterViewInit {
     this.ctx.lineTo(posX, posY);
 
     
-    this.drawingMeasureLine({x:posX, y:posY - y - widthAla - spMeasure}, z, posEnum.horizont, `${z.toString()} px`);
+    this.measureLineService.createMeasureLine(posX, posY - y - widthAla - spMeasure, directionsEnum.right, z, `${z.toString()} px`);
     this.measureLineService.createMeasureLine(posX + z + widthAla + spMeasure, posY - y, directionsEnum.top, y, `${y.toString()} px`);
     this.measureLineService.createMeasureLine(posX - y - spMeasure, posY, directionsEnum.bottom, x, `${x.toString()} px`);
 
     this.ctx.stroke();
   }
 
-  drawingMeasureLine(point: {x: number; y: number;}, width: number, position: posEnum, text: string = '') {
-    this.ctx.font = "italic 12px arial";
-    //this.ctx.fillStyle = "red";
-    if (position == posEnum.horizont) {
-      this.ctx.textAlign = "center";
-    }
-    this.ctx.fillText(text, position == posEnum.horizont ? point.x + width / 2 : point.x + 5, position == posEnum.horizont ? point.y - 5 : point.y + width / 2);
-
-    this.ctx.moveTo(position == posEnum.horizont ? point.x : point.x - 5, point.y + 5);
-    this.ctx.lineTo(point.x, point.y - 5);
-    this.ctx.moveTo(point.x, point.y);
-    this.ctx.lineTo(point.x + width, point.y);
-    this.ctx.moveTo(point.x + width, point.y + 5);
-    this.ctx.lineTo(point.x + width, point.y - 5);
-  }
+  
+  private setFoldGroup(foldGroup : String, initialize : boolean, shapeFold : number) : any{
+        
+    if(!initialize){
+     switch(foldGroup){
+       case "A":
+         this.TypeFoldA = shapeFold;
+         break;
+       case "B":
+         this.TypeFoldB = shapeFold;
+         break;
+       default : break;  
+     }
+    
+   }
+ }
 
   
   

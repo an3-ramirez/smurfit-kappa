@@ -6,10 +6,10 @@
     </div>
     <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 col-xs-12" [ngSwitch]="typeBox">
         <div class="card shadow m-3">
-            <app-cube2d [x]="x" [y]="y" [z]="z" [foldHeight]="foldHeight" [shapeFold]="shapeFold"
+            <app-cube2d [x]="x" [y]="y" [z]="z" [foldHeight]="foldHeight" [shapeFold]="shapeFold" [foldGroup] = "foldGroup"
                 *ngSwitchCase="BoxTypeEnum.BOX_ONE">
             </app-cube2d>
-            <app-box1 [x]="x" [y]="y" [z]="z" [foldHeight]="foldHeight" [shapeFold]="shapeFold"
+            <app-box1 [x]="x" [y]="y" [z]="z" [foldHeight]="foldHeight" [shapeFold]="shapeFold" [foldGroup] = "foldGroup"
                 *ngSwitchCase="BoxTypeEnum.BOX_TWO">
             </app-box1>
             <app-cube *ngSwitchCase="BoxTypeEnum.BOX_TREE"></app-cube>

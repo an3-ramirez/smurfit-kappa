@@ -23,6 +23,9 @@ export class Box1Component implements OnInit, AfterViewInit, OnChanges {
   private foldService : CreateFoldService;
   private measureLineService : CreateMeasureLineService;
   private rectService : CreateRectService;
+  private TypeFoldA : number;
+  private TypeFoldB : number;
+  
 
   public innerWidth: any;
   public innerHeight: any;
@@ -33,6 +36,7 @@ export class Box1Component implements OnInit, AfterViewInit, OnChanges {
   @Input() public z: number = 0;
   @Input() public foldHeight: number = 0;
   @Input() public shapeFold: number = 0;
+  @Input() public foldGroup! : String;
 
 
   constructor(foldService : CreateFoldService, measureLineService : CreateMeasureLineService, 
@@ -40,6 +44,8 @@ export class Box1Component implements OnInit, AfterViewInit, OnChanges {
     this.foldService = foldService;
     this.measureLineService = measureLineService;
     this.rectService = rectService; 
+    this.TypeFoldA = 1;
+    this.TypeFoldB = 2;
   }
 
   ngOnInit(): void {
@@ -49,7 +55,7 @@ export class Box1Component implements OnInit, AfterViewInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (this.x && this.y && this.z &&  this.shapeFold && this.ctx != undefined) {
-      this.render(this.x, this.y, this.z, this.foldHeight, this.shapeFold);
+      this.render(this.x, this.y, this.z, this.foldHeight, this.shapeFold, false, this.foldGroup);
     }
   }
 
@@ -59,11 +65,14 @@ export class Box1Component implements OnInit, AfterViewInit, OnChanges {
     this.foldService.setContext(this.ctx);
     this.measureLineService.setContexto(this.ctx);
     if (this.x && this.y && this.z && this.shapeFold && this.ctx != undefined) {
-      this.render(this.x, this.y, this.z, this.foldHeight, this.shapeFold);
+      this.render(this.x, this.y, this.z, this.foldHeight, this.shapeFold, true, this.foldGroup);
     }
   }
 
-  private render(x: number, y: number, depht: number, fold: number, shapeFold : number) {
+  private render(x: number, y: number, depht: number, fold: number, shapeFold : number, initialize : boolean, 
+    foldGroup : String) {
+
+    this.setFoldGroup(foldGroup, initialize, shapeFold);
 
     this.ctx.clearRect(0, 0, this.canvasRef.nativeElement.width, this.canvasRef.nativeElement.height);
     let initialX: number = this.canvasRef.nativeElement.width / 2;
@@ -80,9 +89,9 @@ export class Box1Component implements OnInit, AfterViewInit, OnChanges {
         initialX = initialX + depht;
 
         if (index == 1 || index == 3) {
-          this.foldService.createFold(initialX, initialY, depht, fold, shapeFold, directionsEnum.top);
-          this.foldService.createFold(initialX, initialY + x, depht, fold, shapeFold, directionsEnum.bottom);
-          this.measureLineService.createMeasureLine(initialX, initialY - fold - 10, directionsEnum.left, depht, `${depht.toString()} px`);
+          this.foldService.createFold(initialX, initialY, depht, fold, this.TypeFoldA, directionsEnum.top);
+          this.foldService.createFold(initialX, initialY + x, depht, fold, this.TypeFoldA, directionsEnum.bottom);
+          this.measureLineService.createMeasureLine(initialX, initialY - fold - 10, directionsEnum.right, depht, `${depht.toString()} px`);
           if (index == 3) {
             this.measureLineService.createMeasureLine(initialX + depht + 10, initialY, directionsEnum.top, x, `${x.toString()} px`);
           }
@@ -90,22 +99,38 @@ export class Box1Component implements OnInit, AfterViewInit, OnChanges {
 
         if (index == 2) {
           this.rectService.createRect(3, initialX, initialY + x, depht, y, directionsEnum.top);
-          this.foldService.createFold(initialX, initialY + (x + y), depht, fold + 20, 2, directionsEnum.bottom);
+          this.foldService.createFold(initialX, initialY + (x + y), depht, fold + 20, this.TypeFoldB, directionsEnum.bottom);
         }
         this.rectService.createRect(4, initialX, initialY, depht, x, directionsEnum.none);
 
       } else {
         this.rectService.createRect(4, initialX, initialY, depht, x, directionsEnum.none);
-        this.foldService.createFold(initialX, initialY, fold, x, shapeFold, directionsEnum.left);
+        this.foldService.createFold(initialX, initialY, fold, x, this.TypeFoldA, directionsEnum.left);
         this.rectService.createRect(3, initialX, initialY, depht, y, directionsEnum.bottom);
         this.measureLineService.createMeasureLine(initialX - 10, initialY - y, directionsEnum.bottom, y, `${y.toString()} px`);
-        this.foldService.createFold(initialX, initialY - y, depht, fold + 20, 2, directionsEnum.top);
+        this.foldService.createFold(initialX, initialY - y, depht, fold + 20, this.TypeFoldB, directionsEnum.top);
         this.measureLineService.createMeasureLine(initialX - fold - 10, initialY, directionsEnum.bottom, x, `${x.toString()} px`);
       }
     }
 
     this.ctx.stroke();
 
+  }
+
+  private setFoldGroup(foldGroup : String, initialize : boolean, shapeFold : number) : any{
+        
+     if(!initialize){
+      switch(foldGroup){
+        case "A":
+          this.TypeFoldA = shapeFold;
+          break;
+        case "B":
+          this.TypeFoldB = shapeFold;
+          break;
+        default : break;  
+      }
+     
+    }
   }
 
 }

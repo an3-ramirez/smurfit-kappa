@@ -6,5 +6,5 @@ export interface IMeasures {
     heigth: number;
     inclination: number;
     foldHeight?: number;
-    shapeFold?: number;
+    shapeFold?: number; 
 }
